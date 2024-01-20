@@ -1,20 +1,27 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import GalleryNavigation from './components/GalleryNavigation';
 import harvardArt from './data/harvardArt';
 
 const router = createBrowserRouter([
   {
-    path: '*',
-    element: <h2>Page not found</h2>,
-  },
-  {
-    path: '/',
-    element: (
-      <>
-        <h2>Harvard Art Museum</h2>
-        <p>Look, but Don&apos;t Touch. Please select a Gallery in the navigation bar.</p>
-      </>
-    ),
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element:
+          <>
+            <h2>Harvard Art Museum</h2>
+            <p>
+              Look, but Don&apos;t Touch. Please select a Gallery in the
+              navigation bar.
+            </p>
+          </>
+      },
+      {
+        path: "*",
+        element: <h2>Page Not Found</h2>
+      }
+    ]
   },
   {
     path: 'galleries',
@@ -28,6 +35,16 @@ function App() {
     <>
       <RouterProvider router={router} />
     </>
+  );
+}
+function Layout() {
+  return (
+    <div className="page-wrapper">
+      <GalleryNavigation galleries={harvardArt} />
+      <main>
+        <Outlet />
+      </main>
+    </div>
   );
 }
 
