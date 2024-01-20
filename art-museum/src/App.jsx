@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import GalleryNavigation from './components/GalleryNavigation';
 import GalleryView from './components/GalleryView';
 import harvardArt from './data/harvardArt';
+import ArtImageTile from './components/ArtImageTile';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
         path: '/galleries/:galleryId',
         element: <GalleryView galleries={harvardArt} />,
       },
+      {
+        path: '/galleries/:galleryId/art/:artid',
+        element: <GalleryView art={harvardArt}/>
+      }
     ],
   },
 ]);

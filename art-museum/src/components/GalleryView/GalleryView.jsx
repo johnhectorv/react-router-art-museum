@@ -1,4 +1,5 @@
 import { useParams, Navigate } from 'react-router-dom';
+import ArtImageTile from '../ArtImageTile/ArtImageTile'
 
 function GalleryView({ galleries }) {
   const { galleryId } = useParams();
@@ -8,7 +9,16 @@ function GalleryView({ galleries }) {
 
   if (!findArtById) return <Navigate to="/" replace={true} />;
 
-  return <h2>{findArtById.name}</h2>;
+  console.log(findArtById);
+
+  return (
+    <div>
+        <h2>{findArtById.name}</h2>;
+        {findArtById.objects.map(art => (
+          <ArtImageTile key={art.id} art={art.images} galleryId={galleryId} artId={art.id} />
+        ))}
+    </div>
+  )
 }
 
 export default GalleryView;
